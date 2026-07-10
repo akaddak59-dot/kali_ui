@@ -16,4 +16,17 @@ ICONS = {
 
 os.makedirs("assets/icons", exist_ok=True)
 
-for filename, (text, color) in ICONS
+for filename, (text, color) in ICONS.items():
+    pixmap = QPixmap(128, 128)
+    pixmap.fill(QColor(10, 10, 10))
+    
+    painter = QPainter(pixmap)
+    painter.setPen(QPen(color, 2))
+    painter.setFont(QFont("Monospace", 48, QFont.Bold))
+    painter.drawText(QRect(0, 0, 128, 128), Qt.AlignCenter, text)
+    painter.end()
+    
+    pixmap.save(f"assets/icons/{filename}")
+    print(f"Created: assets/icons/{filename}")
+
+print("All icons created successfully!")
